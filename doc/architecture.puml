@@ -1,0 +1,22 @@
+@startuml
+!pragma layout smetana
+skinparam componentStyle rectangle
+skinparam shadowing false
+title SVG CLI — Phase 1 dependency rules
+component "main (composition root)" as main
+component "cli\nTokenizer / CommandRunner" as cli
+component "application\nEditor / Commands / History" as app
+component "ports\nFileStore / SvgCodec" as ports
+component "infrastructure\nDiskFileStore / XmlSvgCodec" as infra
+component "domain\nShape hierarchy / SvgDocument / Factory" as domain
+main --> cli
+main --> app
+main --> infra
+main --> domain
+cli --> app
+app --> domain
+app --> ports
+infra --> ports
+infra --> domain
+ports --> domain
+@enduml
