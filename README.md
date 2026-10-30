@@ -80,4 +80,4 @@ create g       <id>
 - [原文的外部 SVG 示例](examples/other.svg)
 - [提交与答辩说明](doc/SUBMISSION.md)
 
-本地包含分阶段 Git 提交，最终版本以 `final` tag 标记。提交目标仓库：[https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1](https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1)。本地 origin 已配置；推送需本机 Git 具有写入权限。用户确认没有额外环境或验收要求，具体截止时间以课程通知为准。
+本地包含分阶段 Git 提交，最终版本以 `final` tag 标记。提交目标仓库：[https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1](https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1)。本地 origin 已配置；提交分支为 main，最终标签为 final。用户确认没有额外环境或验收要求，具体截止时间以课程通知为准。

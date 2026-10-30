@@ -174,7 +174,7 @@ node dist/main.js --script examples/flowchart.commands
 | `undo/redo` | 一条编辑一个单元、新编辑清 redo、IO 成功后屏障 |
 | 统一错误与失败不改状态 | 单行 error 前缀；失败命令后对比完整序列化状态并验证 redo 未丢失 |
 | SVG 存盘及读回 | XML 转义、嵌套组、viewBox、缺失 id 警告；真实磁盘和 round-trip 测试 |
-| Git 和文档 | 分阶段 commit、最终 final tag、本文件与组件图；origin 已配置为用户提供的仓库，推送等待 Git 写入凭据 |
+| Git 和文档 | 分阶段 commit、最终 final tag、本文件与组件图；origin 已配置为用户提供的仓库，提交分支 main / 标签 final 可从远程核验 |
 
 ### 3. 边界与限制
 

@@ -18,9 +18,9 @@ npm run demo
 
 用户提供的目标仓库：[https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1](https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1)。本地 `origin` 已配置为该仓库。用户确认没有额外环境或验收要求，截止时间仍以课程通知为准。
 
-远程仓库经检查为空。当前 GitHub 连接器登录为 `ZihangZ`，仅有读取权限；本机 HTTPS Git 尚无可用登录凭据，SSH 代理也没有已加载身份。因此尚未推送，不把本地成功当成远程提交成功。
+交付前远程仓库经检查为空。提交采用完整 Git 历史推送，分支为 `main`，最终版本标签为 `final`。本次认证仅通过进程临时环境传递，不把访问令牌写入代码、Git 配置或交付压缩包，也不更改系统的凭据保存设置。
 
-在本机 Git 使用具有此仓库写权限的 GitHub 账号完成登录后，可执行：
+今后在本机 Git 使用具有此仓库写权限的 GitHub 账号完成登录后，可执行：
 
 ```bash
 git push --atomic -u origin main refs/tags/final
