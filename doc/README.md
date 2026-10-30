@@ -151,7 +151,7 @@ node dist/main.js --script examples/flowchart.commands
 
 实际开发环境为 Node.js 24.22.0、npm 11.19.1；依赖使用精确版本并提交 lockfile。声明支持 Node.js >=22；本次实测的是 24.22.0，尚未在其他平台逐一验证。
 
-`npm run check` 包含生产与测试的严格 TypeScript 检查、自动测试及编译。当前 **99 个测试全部通过**，无跳过项。测试分为 5 个 `.test.ts` 文件及 1 个测试辅助文件：
+`npm run check` 包含生产与测试的严格 TypeScript 检查、自动测试及编译。当前 **99 个测试全部通过**，无跳过项。交付前还从独立 Git 副本执行 npm ci 和全部检查，编译后的 CLI 回放也成功；原始结果见 [verification.txt](verification.txt)。测试分为 5 个 `.test.ts` 文件及 1 个测试辅助文件：
 
 | 文件 | 验证内容 |
 |---|---|
