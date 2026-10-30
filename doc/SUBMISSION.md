@@ -14,17 +14,19 @@ npm run demo
 
 ## Git 状态与远程提交
 
-当前分阶段历史由 AI 在本地实际创建，作者记录为 Codex；未冒充学生身份。最终版本带 `final` tag。教师所需的远程仓库地址和截止时间尚未提供，因此没有声称已经推送或满足截止时间。
+当前分阶段历史由 AI 在本地实际创建，作者记录为 Codex；未冒充学生身份。最终版本带 `final` tag。
 
-先在 GitHub 或 Gitee 建立空仓库（不要自动初始化 README），然后在本项目目录使用实际地址：
+用户提供的目标仓库：[https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1](https://github.com/kangtian2004/Advanced-Software-Development-Technology-lab1)。本地 `origin` 已配置为该仓库。用户确认没有额外环境或验收要求，截止时间仍以课程通知为准。
+
+远程仓库经检查为空。当前 GitHub 连接器登录为 `ZihangZ`，仅有读取权限；本机 HTTPS Git 尚无可用登录凭据，SSH 代理也没有已加载身份。因此尚未推送，不把本地成功当成远程提交成功。
+
+在本机 Git 使用具有此仓库写权限的 GitHub 账号完成登录后，可执行：
 
 ```bash
-git remote add origin <你的实际仓库地址>
-git push -u origin main
-git push origin final
+git push --atomic -u origin main refs/tags/final
 ```
 
-如果 origin 已存在，先用 `git remote -v` 确认再决定是否修改。若更改了代码，不要盲目移动已提交的 final；根据课程规定确认最终 tag 的更新方式。
+不需要重新添加 origin。若从压缩包恢复，请先用 `git remote -v` 确认地址；若更改代码，不要盲目覆盖已经公开的 final 标签，应根据课程规定处理。
 
 推送之后核对：
 
