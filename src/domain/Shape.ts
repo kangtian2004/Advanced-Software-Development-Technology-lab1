@@ -40,7 +40,7 @@ export abstract class Shape {
       this.presentation.set(attribute, value);
     } else throw new Error(`unsupported SVG attribute: ${attribute}`);
   }
-  inheritContainer(group: Shape): void {
+  inheritContainer(group: Group): void {
     for (const [key, value] of Object.entries(group.attributes)) {
       if (key === 'transform') {
         this.presentation.set(key, `${value} ${this.presentation.get(key) ?? ''}`.trim());

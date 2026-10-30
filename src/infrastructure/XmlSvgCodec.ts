@@ -20,6 +20,7 @@ export class XmlSvgCodec implements SvgCodec {
     if (!root || root.localName !== 'svg' || (root.namespaceURI && root.namespaceURI !== this.namespace)) {
       throw new Error('invalid SVG: expected <svg> root');
     }
+    this.assertNoText(root);
     const view = root.getAttribute('viewBox');
     let viewBox: string | undefined;
     let viewWidth = 800, viewHeight = 600;
@@ -79,11 +80,15 @@ export class XmlSvgCodec implements SvgCodec {
     const children: Element[] = [];
     for (let node = element.firstChild; node; node = node.nextSibling) {
       if (node.nodeType === 1) children.push(node as Element);
-      else if ((node.nodeType === 3 || node.nodeType === 4) && node.nodeValue?.trim() && element.localName !== 'text') {
+    }
+    return children;
+  }
+  private assertNoText(element: Element): void {
+    for (let node = element.firstChild; node; node = node.nextSibling) {
+      if ((node.nodeType === 3 || node.nodeType === 4) && node.nodeValue?.trim()) {
         throw new Error(`invalid SVG: unexpected text inside <${element.localName}>`);
       }
     }
-    return children;
   }
   private readShape(element: Element, reserved: Set<string>, warnings: string[]): Shape {
     if (element.namespaceURI && element.namespaceURI !== this.namespace) throw new Error('invalid SVG: unsupported namespace');
@@ -97,6 +102,7 @@ export class XmlSvgCodec implements SvgCodec {
     }
     const shape = this.factory.read(type, id, this.attributes(element), element.textContent ?? '');
     const children = this.elements(element);
+    if (shape.text === undefined) this.assertNoText(element);
     if (shape instanceof Group) for (const child of children) shape.insert(this.readShape(child, reserved, warnings));
     else if (children.length) throw new Error(`invalid SVG: unsupported child inside <${type}>`);
     return shape;
