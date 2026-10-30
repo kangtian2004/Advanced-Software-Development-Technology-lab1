@@ -158,3 +158,13 @@ for (const [type, params] of creations) {
     h.ok('redo'); h.ok('redo'); assert.equal(h.snapshot(), after);
   });
 }
+
+
+test('invalid XML characters fail at edit time without changing state or history', () => {
+  const h = new Harness(); h.ok('init'); h.ok('create text t 1 2 "OK"');
+  const before = h.snapshot();
+  for (const line of ['set t text "bad\u0000"', 'create g "bad\u0001"', 'set t fill "bad\u0002"']) {
+    h.error(line, 'invalid XML character'); assert.equal(h.snapshot(), before);
+  }
+  h.ok('undo'); assert.deepEqual(h.ids(), []);
+});

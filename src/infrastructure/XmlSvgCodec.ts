@@ -10,6 +10,7 @@ export class XmlSvgCodec implements SvgCodec {
   private readonly namespace = 'http://www.w3.org/2000/svg';
   constructor(private readonly factory: ShapeFactory) {}
   decode(source: string): { document: SvgDocument; warnings: string[] } {
+    Validation.xml(source);
     if (/<!DOCTYPE|<!ENTITY/iu.test(source)) throw new Error('invalid SVG: DTD and entities are not supported');
     let xml: XmlDocument;
     try {
@@ -104,7 +105,7 @@ export class XmlSvgCodec implements SvgCodec {
     const element = xml.createElementNS(this.namespace, shape.kind);
     element.setAttribute('id', shape.id); this.writeAttributes(element, shape.attributes);
     if (shape.text !== undefined) {
-      this.validateXmlString(shape.text);
+      Validation.xml(shape.text);
       element.appendChild(xml.createTextNode(shape.text));
     }
     if (shape instanceof Group && shape.children.length) {
@@ -117,11 +118,6 @@ export class XmlSvgCodec implements SvgCodec {
     return element;
   }
   private writeAttributes(element: Element, attributes: Readonly<Record<string, string>>): void {
-    for (const [key, value] of Object.entries(attributes)) { this.validateXmlString(value); element.setAttribute(key, value); }
-  }
-  private validateXmlString(value: string): void {
-    if (/[^\u0009\u000A\u000D\u0020-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}]/u.test(value)) {
-      throw new Error('invalid XML character');
-    }
+    for (const [key, value] of Object.entries(attributes)) { Validation.xml(value); element.setAttribute(key, value); }
   }
 }

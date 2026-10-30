@@ -23,6 +23,7 @@ export abstract class Shape {
     for (const [key, value] of this.geometry) this.geometry.set(key, this.validateGeometry(key, value * factor));
   }
   set(attribute: string, value: string): void {
+    Validation.xml(value);
     if (this.geometry.has(attribute)) this.geometry.set(attribute, this.validateGeometry(attribute, value));
     else if (['fill', 'stroke', 'stroke-width'].includes(attribute)) {
       if (attribute === 'stroke-width') value = String(Validation.nonnegative(value, attribute));
@@ -32,6 +33,7 @@ export abstract class Shape {
   }
   /** Import-only presentation metadata; CLI set retains its strict whitelist. */
   importPresentation(attribute: string, value: string): void {
+    Validation.xml(value);
     if (['fill', 'stroke', 'stroke-width'].includes(attribute)) this.set(attribute, value);
     else if (['transform', 'font-size', 'font-family', 'font-weight', 'text-anchor', 'dominant-baseline', 'opacity', 'fill-opacity', 'stroke-opacity', 'stroke-linecap', 'stroke-linejoin', 'data-kind'].includes(attribute)) {
       if (/[\r\n]/u.test(value)) throw new Error('attribute must fit on one line');

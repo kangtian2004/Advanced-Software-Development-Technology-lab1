@@ -81,3 +81,10 @@ for (const xml of [
     h.ok('undo'); assert.deepEqual(h.ids(), ['original']); h.ok('save'); assert.ok(h.files.files.has('original.svg'));
   });
 }
+
+
+test('control characters in imported XML are rejected before publication', () => {
+  const h = new Harness(); h.ok('init'); const before = h.snapshot();
+  h.files.files.set('bad.svg', '<svg><text id="t">bad\u0000</text></svg>');
+  h.error('read bad.svg', 'invalid XML character'); assert.equal(h.snapshot(), before);
+});
