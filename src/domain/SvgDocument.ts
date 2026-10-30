@@ -48,6 +48,7 @@ export class SvgDocument {
   }
   clone(): SvgDocument {
     const copy = new SvgDocument(this.width, this.height, this.view);
+    for (const [key, value] of Object.entries(this.root.attributes)) copy.root.importPresentation(key, value);
     for (const child of this.root.children) copy.root.insert(child.clone());
     return copy;
   }
